@@ -74,6 +74,7 @@ for R1_FILE in "$RAW_DATA_DIR"/*_R1.fastq.gz; do
     R2_UNPAIRED_OUT="$TRIMMED_DATA_DIR/${BASENAME}_R2.trimU.fastq.gz"
 
     # Run Trimmomatic 
+    #Quality filters
     trimmomatic PE \
         -threads 4 \
         -phred33 \

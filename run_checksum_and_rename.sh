@@ -8,6 +8,7 @@
 #      _R1_002.fastq.gz, _R2_003.fastq.gz → _R1.fastq.gz / _R2.fastq.gz).
 #
 # 2) Generates one MD5 checksum per file:
+#  Integryty verification for FASTQ and alignment files:
 #    - Supports .fastq.gz, .fq.gz, .sam, .bam.
 #    - Saves each checksum as <filename>.md5 in:
 #          Project/Tools/Checksums/
@@ -109,7 +110,7 @@ echo "--- GENERATING ONE MD5 PER FILE ---"
 
 shopt -s extglob nullglob #Avoiding errors if no files match
 
-#Create MD5 checksums for supported file types(fastq.gz, fq.gz, sam, bam)
+#Create MD5 checksums integrity verification and for supported file types(fastq.gz, fq.gz, sam, bam)
 # And save each checksum as <filename>.md5 in MD5_DIR
 
 for file in "$RAW_DATA_DIR"/*.{fastq.gz,fq.gz,sam,bam}; do

@@ -31,8 +31,8 @@ Project/
 │   ├── run_checksum_and_rename.sh
 │   ├── run_fastqc_raw.sh
 │   ├── run_trimmomatic.sh
-│   ├── run_multiqc.sh
-│   └── run_pipeline.sh   (optional)
+│   └── run_multiqc.sh
+│  
 │
 ├── Data/
 │   └── Raw_data/

@@ -24,6 +24,7 @@ bash scripts/run_multiqc.sh
 
 ## Directory Structure
 
+```text
 Project/
 ├── Scripts/
 │   ├── create_directories.sh
@@ -31,7 +32,7 @@ Project/
 │   ├── run_fastqc_raw.sh
 │   ├── run_trimmomatic.sh
 │   ├── run_multiqc.sh
-│   └── (optional) run_pipeline.sh
+│   └── run_pipeline.sh   (optional)
 │
 ├── Data/
 │   └── Raw_data/
@@ -43,6 +44,7 @@ Project/
 │   └── Multiqc_report/
 │
 └── logs/
+```
 
 
 

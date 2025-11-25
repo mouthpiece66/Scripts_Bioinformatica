@@ -17,9 +17,13 @@ MultiQC
 ## Usage examples 
 
 bash scripts/create_directories.sh
+
 bash scripts/run_checksum_and_rename.sh
+
 bash scripts/run_fastqc_raw.sh
+
 bash scripts/run_trimmomatic.sh
+
 bash scripts/run_multiqc.sh
 
 ## Directory Structure

@@ -9,8 +9,11 @@ FastQC, Trimmomatic trimming, and MultiQC summary generation.
 ## Requirements
 
 bash >= 4
+
 FastQC
+
 Trimmomatic
+
 MultiQC
 
 

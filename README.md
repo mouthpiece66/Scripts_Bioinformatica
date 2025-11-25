@@ -25,12 +25,25 @@ bash scripts/run_multiqc.sh
 ## Directory Structure
 
 Project/
-│── Scripts/
-│── Data/Raw_data/
-│── Tools/Fastqc/
-│── Tools/Trimmed_data/
-│── Tools/Multiqc_report/
-│── logs/
+├── Scripts/
+│   ├── create_directories.sh
+│   ├── run_checksum_and_rename.sh
+│   ├── run_fastqc_raw.sh
+│   ├── run_trimmomatic.sh
+│   ├── run_multiqc.sh
+│   └── (optional) run_pipeline.sh
+│
+├── Data/
+│   └── Raw_data/
+│
+├── Tools/
+│   ├── Fastqc/
+│   ├── Fastqc_trimmed/
+│   ├── Trimmed_data/
+│   └── Multiqc_report/
+│
+└── logs/
+
 
 
 ## Workflow Diagram

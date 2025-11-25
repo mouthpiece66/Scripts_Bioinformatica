@@ -1,2 +1,36 @@
 # Scripts_Bioinformatica
-This project will allow us to set up our enviroment to make upstream analisis in bioinformatics.
+Bioinformatics QC Pipeline — FASTQ → FastQC → Trimmomatic → MultiQC
+
+This repository contains a modular sequencing-quality pipeline for Illumina FASTQ data.
+It includes automated directory creation, integrity checks (MD5), filename normalization,
+FastQC, Trimmomatic trimming, and MultiQC summary generation.
+
+## Requirements
+
+bash >= 4
+FastQC
+Trimmomatic
+MultiQC
+
+## Workflow Diagram
+Raw FASTQ
+   ↓ (MD5 + rename)
+QC1: FastQC (raw)
+   ↓
+Trimmomatic
+   ↓
+QC2: FastQC (trimmed)
+   ↓
+MultiQC Summary
+
+## Usage examples 
+
+bash scripts/create_directories.sh
+bash scripts/run_checksum_and_rename.sh
+bash scripts/run_fastqc_raw.sh
+bash scripts/run_trimmomatic.sh
+bash scripts/run_multiqc.sh
+
+
+Author: Nathalia Crespo
+ULisboa — Bioinformatics Workflow Assignment

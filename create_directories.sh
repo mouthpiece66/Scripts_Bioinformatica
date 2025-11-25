@@ -4,12 +4,12 @@
 
 # Array of subdirectories to create (without including the project name)
 SUB_DIRS=(
-    "Project/Scripts"
     "Project/Data/Raw_data"
     "Project/Tools/Fastqc"
     "Project/Tools/Fastqc_trimmed"
     "Project/Tools/Trimmed_data"
     "Project/Tools/Multiqc_report"
+    "Project/Tools/Scripts"
     "Project/Downstream_analysis/Alignment"
     "Project/logs"
 )

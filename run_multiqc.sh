@@ -51,15 +51,15 @@ BROWN='\033[0;33m'   # Amarillo/Marrón para el tronco
 YELLOW='\033[1;33m' # Amarillo brillante para la estrella
 NC='\033[0m'         # Sin color (resetea)
 
-# Dibujo del árbol de Navidad
-echo -e "${YELLOW}           * ${NC}" # Estrella
+# Navidad
+echo -e "${YELLOW}           * ${NC}" 
 echo -e "${GREEN}          / \\          ${NC}"
 echo -e "${GREEN}         /___\\         ${NC}"
-echo -e "${GREEN}        /  o  \\        ${NC}" # Adorno simple
+echo -e "${GREEN}        /  o  \\        ${NC}" 
 echo -e "${GREEN}       /_______\\       ${NC}"
-echo -e "${GREEN}      /   o     \\      ${NC}" # Adorno simple
+echo -e "${GREEN}      /   o   o \\      ${NC}" 
 echo -e "${GREEN}     /___________\\     ${NC}"
-echo -e "${GREEN}    /   o  o      \\    ${NC}" # Más adornos
+echo -e "${GREEN}    /   o  o   o  \\    ${NC}"
 echo -e "${GREEN}   /_______________\\   ${NC}"
-echo -e "${BROWN}         | |         ${NC}" # Tronco
-echo -e "${BROWN}         |_|         ${NC}" # Base del Tronco
+echo -e "${BROWN}         | |         ${NC}" 
+echo -e "${BROWN}         |_|         ${NC}" 

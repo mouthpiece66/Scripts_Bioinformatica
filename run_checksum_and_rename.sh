@@ -1,81 +1,120 @@
 #!/bin/bash
 
 # This script performs two main tasks:
-#  Generates MD5 checksums for all raw FASTQ files to verify file integrity.
-#  Renames FASTQ files from common non-standard formats (e.g., _1.fastq.gz)
-#  to a standard format (e.g., _R1.fastq.gz) compatible with downstream scripts.
+# 1) Normalizes FASTQ filenames:
+#    - Renames non-standard patterns (e.g., _1.fastq.gz, _2.fastq.gz)
+#      to standard  format (_R1.fastq.gz, _R2.fastq.gz).
+#    - Collapses Illumina lane suffixes (e.g., _R1_001.fastq.gz,
+#      _R1_002.fastq.gz, _R2_003.fastq.gz → _R1.fastq.gz / _R2.fastq.gz).
+#
+# 2) Generates one MD5 checksum per file:
+#    - Supports .fastq.gz, .fq.gz, .sam, .bam.
+#    - Saves each checksum as <filename>.md5 in:
+#          Project/Tools/Checksums/
+#
+# Output is logged and shown live using tee.
 
-set -euo pipefail # Exit on error, unset variables, or pipeline failures
+# Exit on error
+set -euo pipefail 
 
-# --- Directory and Log File Variables ---
-RAW_DATA_DIR="./Project/Data/Raw_data"
-LOG_DIR="./Project/logs"
-LOG_FILE="${LOG_DIR}/checksum_and_rename_$(date +%Y%m%d_%H%M%S).log"
+# Directory and Log File Variable
+
+PROJECT_DIR="./Project"
+RAW_DATA_DIR="$PROJECT_DIR/Data/Raw_data"
+MD5_DIR="$PROJECT_DIR/Tools/Checksums"
+LOG_DIR="$PROJECT_DIR/logs"
+
+LOG_FILE="$LOG_DIR/checksum_and_rename_$(date +%Y%m%d_%H%M%S).log"
 
 #create directory if not exist and log file
 mkdir -p "$LOG_DIR"
+mkdir -p "$MD5_DIR"
+mkdir -p "$RAW_DATA_DIR"
 touch "$LOG_FILE"
 
 #Redirect all output to a log file and also show in the terminal 
 exec &> >(tee -a "$LOG_FILE")
 
-echo "========================================================="
-echo "   🧿 Integrity and Filename Check & Rename 👁️ "
-echo "========================================================="
-echo "Log file: $LOG_FILE"
-echo "Target directory: $RAW_DATA_DIR"
-echo "---------------------------------------------------------"
 
-#MD5 Checksum Generation 
-echo ""
-echo "--- Part 1: Generating MD5 Checksums 🧿 ---"
+echo "=============================================================="
+echo "    🧿 MD5 PER SAMPLE + ADVANCED RENAME HANDLING SCRIPT 👁️"
+echo "=============================================================="
+echo "Raw data directory : $RAW_DATA_DIR"
+echo "MD5 output folder  : $MD5_DIR"
+echo "--------------------------------------------------------------"
 
-if [ ! -d "$RAW_DATA_DIR" ]; then
-    echo "Error: Raw data directory not found at '$RAW_DATA_DIR'"
-    exit 1
-fi
 
-# Temporarily navigate into the data directory
-cd "$RAW_DATA_DIR"
+echo "--- NORMALIZING FILENAMES ---"
 
-# Check if there are any fastq.gz files to process
-if compgen -G "*.fastq.gz" > /dev/null; then
-    echo "Calculating MD5 checksums for all *.fastq.gz files..."
-    md5sum *.fastq.gz > md5sum.txt
-    echo "🧿👁️ MD5 checksums saved to '$RAW_DATA_DIR/md5sum.txt'"
-else
-    echo "Warning: No *.fastq.gz files found. Skipping checksum generation."
-fi
+shopt -s nullglob  #Avoiding errors if no files match
 
-# Navigate back to the original directory
-cd - > /dev/null
-
-# Part 2: Filename Validation and Renaming 
-echo ""
-echo "--- Part 2: Validating and Renaming Files ---"
-echo "Standardizing to _R1.fastq.gz and _R2.fastq.gz format..."
-
-# Loop through all fastq.gz files in the raw data directory
-for file in "$RAW_DATA_DIR"/*.fastq.gz; do
+for file in "$RAW_DATA_DIR"/*; do
     
-    # Skip if no files are found
+    base=$(basename "$file")
+
+    # Skip if not a regular file
+    [ -f "$file" ] || continue
+
+    
+    # 1) Rename ANY Illumina lane like _R1_###.fastq.gz
+
+    if [[ "$base" =~ _R1_[0-9]{3}\.fastq\.gz$ ]]; then
+        new_name="${file%_R1_*}_R1.fastq.gz"
+        echo "RENAMING lane: $base  →  $(basename "$new_name")"
+        mv "$file" "$new_name"
+        continue
+    fi
+
+    if [[ "$base" =~ _R2_[0-9]{3}\.fastq\.gz$ ]]; then
+        new_name="${file%_R2_*}_R2.fastq.gz"
+        echo "RENAMING lane: $base  →  $(basename "$new_name")"
+        mv "$file" "$new_name"
+        continue
+    fi
+
+    
+    # 2_Rename simple patterns (_1.fastq.gz → _R1.fastq.gz)
+
+    declare -A patterns=(
+        ["_1.fastq.gz"]="_R1.fastq.gz"
+        ["_2.fastq.gz"]="_R2.fastq.gz"
+        ["_1.fq.gz"]="_R1.fq.gz"
+        ["_2.fq.gz"]="_R2.fq.gz"
+    )
+
+    for p in "${!patterns[@]}"; do
+        if [[ "$base" == *"$p" ]]; then
+            new_name="${file%$p}${patterns[$p]}"
+            echo "RENAMING: $base  →  $(basename "$new_name")"
+            mv "$file" "$new_name"
+            continue 2
+        fi
+    done
+done
+
+
+
+# PART 2 – MD5 SUM
+
+
+echo ""
+echo "--- GENERATING ONE MD5 PER FILE ---"
+
+shopt -s extglob nullglob #Avoiding errors if no files match
+
+for file in "$RAW_DATA_DIR"/*.{fastq.gz,fq.gz,sam,bam}; do
+
     [ -e "$file" ] || continue
 
-    filename=$(basename "$file")
+    base=$(basename "$file")
 
-    # Check for _1.fastq.gz and rename to _R1.fastq.gz 
-    if [[ "$filename" == *"_1.fastq.gz" ]]; then
-        new_name="${file%_1.fastq.gz}_R1.fastq.gz"
-        echo "RENAMING: $file -> $new_name"
-        mv "$file" "$new_name"
-    
-    #Check for _2.fastq.gz and rename to _R2.fastq.gz 
-    elif [[ "$filename" == *"_2.fastq.gz" ]]; then
-        new_name="${file%_2.fastq.gz}_R2.fastq.gz"
-        echo "RENAMING: $file -> $new_name"
-        mv "$file" "$new_name"
-    fi
+    MD5_OUT="$MD5_DIR/${base}.md5"
+
+    echo "MD5 for: $base → $MD5_OUT"
+    md5sum "$file" > "$MD5_OUT"
+
 done
+
 
 echo "-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-."
 echo "🌞👁️ Filename validation and renaming process complete."

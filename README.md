@@ -26,22 +26,19 @@ bash scripts/run_multiqc.sh
 
 ```text
 Project/
-├── Scripts/
-│   ├── create_directories.sh
-│   ├── run_checksum_and_rename.sh
-│   ├── run_fastqc_raw.sh
-│   ├── run_trimmomatic.sh
-│   └── run_multiqc.sh
-│  
 │
-├── Data/
-│   └── Raw_data/
+├── Data/Raw_data/
 │
 ├── Tools/
 │   ├── Fastqc/
 │   ├── Fastqc_trimmed/
 │   ├── Trimmed_data/
-│   └── Multiqc_report/
+│   ├── Multiqc_report/
+│   ├── Checksums/
+│   └── Scripts/
+│
+├── Downstream_analysis/
+│   └── Alignment/
 │
 └── logs/
 ```
@@ -61,6 +58,20 @@ QC2: FastQC (trimmed)
 MultiQC Summary
 
 
+
+
+
+✔ Filename normalization (R1/R2)
+
+✔ One MD5 per sample
+
+✔ Supports .fastq.gz, .fq.gz, .sam, .bam
+
+✔ Logging to terminal + file (tee)
+
+✔ Designed for any number of samples
+
+✔ HPC-friendly, reproducible, modular
 
 
 

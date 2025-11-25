@@ -1,0 +1,9 @@
+=========================================================
+ ✂️✂️ STARTING: Trimmomatic Paired-End Processing  ✂️✂️
+=========================================================
+Log file: ./Project/logs/trimmomatic_20251124_201616.log
+Raw FASTQ directory: ./Project/Data/Raw_data
+Trimmed output directory: ./Project/Tools/Trimmed_data
+---------------------------------------------------------
+Error: Adapters file not found at '/home/fc66501/miniconda3/envs/tools_qc/share/trimmomatic-0.40-0/adapters/TruSeq3-PE-2.fa'
+Please edit the script and set the correct path.

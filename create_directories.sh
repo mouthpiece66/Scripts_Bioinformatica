@@ -4,15 +4,16 @@
 
 # Array of subdirectories to create (without including the project name)
 SUB_DIRS=(
-    "00_scripts"    
-    "01_raw_data"
-    "02_fastqc_raw"
-    "03_trimmed_data"
-    "04_fastqc_trimmed"
-    "05_multiqc_report"
-    "06_alignment"
-    "07_downstream_analysis"
+    "Project/Scripts"
+    "Project/Data/Raw_data"
+    "Project/Tools/Fastqc"
+    "Project/Tools/Fastqc_trimmed"
+    "Project/Tools/Trimmed_data"
+    "Project/Tools/Multiqc_report"
+    "Project/Downstream_analysis/Alignment"
+    "Project/logs"
 )
+
 
 echo "Creating subdirectories in the current location: $(pwd)"
 
@@ -24,5 +25,17 @@ for dir in "${SUB_DIRS[@]}"; do
     echo "  - Created: $dir"
 done
 
-echo "--------------------------------------------------------"
-echo "Successfully created internal structure."
+echo "-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-."
+echo "  ⭐🌞Successfully created internal structure 🔧🛠️"
+echo "-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-."
+
+PURPLE='\033[0;35m'
+NC='\033[0m'
+
+echo -e "${PURPLE}"
+echo "  /\\__/\\"
+echo "  ( o.o )"
+echo "   > ^ <"
+echo "  /  -  \\"
+echo " /_______\\"
+echo -e "${NC}"

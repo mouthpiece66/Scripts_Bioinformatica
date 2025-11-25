@@ -65,4 +65,5 @@ MultiQC Summary
 
 
 Author: Nathalia Crespo
-ULisboa — Bioinformatics Workflow Assignment
+
+ULisboa — Introduction to Bioinformatics and Computational Biology

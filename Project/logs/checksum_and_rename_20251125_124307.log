@@ -1,0 +1,26 @@
+=========================================================
+   🧿 Integrity and Filename Check & Rename 👁️ 
+=========================================================
+Log file: ./Project/logs/checksum_and_rename_20251125_124307.log
+Target directory: ./Project/Data/Raw_data
+---------------------------------------------------------
+
+--- Part 1: Generating MD5 Checksums 🧿 ---
+Warning: No *.fastq.gz files found. Skipping checksum generation.
+
+--- Part 2: Validating and Renaming Files ---
+Standardizing to _R1.fastq.gz and _R2.fastq.gz format...
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+🌞👁️ Filename validation and renaming process complete.
+-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+[0;32m
+ +---------------------------+
+ | fc66501@loki:~$ checksum  |
+ |fc66501@loki:~$ file_sample|
+ | Compiling...              |
+ | Success!                  |
+ |                           |
+ +--------------------------+
+      \   /
+       \ /
+[0m

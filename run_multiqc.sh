@@ -40,10 +40,9 @@ multiqc \
     "$TRIMMED_DATA_DIR" \
     -o "$MULTIQC_REPORT_DIR" \
     -n "multiqc_report.html" \
-    -t "MultiQC Report - Raw and Trimmed Data"
 
 echo "-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-."
-echo " ⭐🌞 MultiQC report generation complete 📋"
+echo "         ⭐🌞 MultiQC report complete 📋               "
 echo "Report available at: $MULTIQC_REPORT_DIR/multiqc_report.html"
 echo "-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-."
 

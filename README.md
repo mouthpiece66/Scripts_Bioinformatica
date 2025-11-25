@@ -54,8 +54,9 @@ Project/
 
 ## Workflow Diagram
 
+```text
 Raw FASTQ
-   ↓ (MD5 + rename)
+   ↓ (MD5 + rename)   
 QC1: FastQC (raw)
    ↓
 Trimmomatic
@@ -63,7 +64,7 @@ Trimmomatic
 QC2: FastQC (trimmed)
    ↓
 MultiQC Summary
-
+```
 
 
 

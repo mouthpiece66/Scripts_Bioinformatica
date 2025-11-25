@@ -1,6 +1,0 @@
-=========================================================
- ✂️✂️ STARTING: Trimmomatic Paired-End Processing  ✂️✂️
-=========================================================
-Log file: ./Project/logs/trimmomatic_20251124_201351.log
-Raw FASTQ directory: ./Project/Data/Raw_data
-./run_trimmomatic.sh: line 31: TRIM_DIR: unbound variable

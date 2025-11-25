@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# This script performs paired-end quality trimming using Trimmomatic. It:
+#   - Detects matching R1 and R2 FASTQ files automatically.
+#   - Removes adapters and low-quality bases.
+#   - Applies sliding-window trimming, head cropping, and minimum length filters.
+#
+# Trimmed outputs (paired/unpaired) are saved in the Trimmed_data/ directory.
+# The script also logs all actions while displaying output live using 'tee'.
+# If an R2 file is missing, the script safely skips the sample and prints a warning.
+
 # This script runs Trimmomatic on all paired-end FASTQ files in a directory.
 
 set -euo pipefail # Exit on error

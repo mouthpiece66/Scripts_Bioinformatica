@@ -1,7 +1,13 @@
 #!/bin/bash
 
-# Exit if a command fails (-e), if an undefined variable is used (-u),
-# and fail if any command in a pipeline fails (-o pipefail)
+# This script runs FastQC on all raw FASTQ files in the project. It 
+# automatically detects every .fastq.gz file in the raw data directory and 
+# performs quality control for each sample. 
+#
+# All FastQC reports are saved into the Fastqc/ directory, and a log file is 
+# generated for reproducibility. Output is shown live and saved via 'tee'.
+
+#Exit on error
 set -euo pipefail
 
 
@@ -34,6 +40,9 @@ echo "---------------------------------------------------------"
 
 
 # Search for all FASTQ.gz files and run FastQC one by one (for any number of samples)
+#Search in RAW_DATA_DIR for files ending in .fastq.gz, limiting to that directory only (no subdirs)
+#Filter files that ends with .fastq.gz
+# output result of the first part to while loop that reads each file line by line
 find "$RAW_DATA_DIR" -maxdepth 1 -name "*.fastq.gz" | while read FASTQ_FILE; do
 
     FILE_NAME=$(basename "$FASTQ_FILE")

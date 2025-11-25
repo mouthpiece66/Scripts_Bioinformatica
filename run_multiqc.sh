@@ -1,6 +1,11 @@
 #!/bin/bash
 
-# This script runs MultiQC to aggregate reports from various bioinformatics tools.
+# This script runs MultiQC to generate a unified quality-control report 
+# summarizing all outputs from FastQC (raw + trimmed) and Trimmomatic.
+#
+# The final multiqc_report.html file is saved in the Multiqc_report/ directory.
+# All progress and messages are logged while being printed live through 'tee'.
+
 
 set -euo pipefail # Exit on error, unset variables, or pipeline failures
 
@@ -43,13 +48,13 @@ multiqc \
 
 echo "-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-."
 echo "         ⭐🌞 MultiQC report complete 📋               "
-echo "Report available at: $MULTIQC_REPORT_DIR/multiqc_report.html"
+echo "Report available at: $MULTIQC_REPORT_DIR                "
 echo "-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-."
 
-GREEN='\033[0;32m'  # Verde para las hojas
-BROWN='\033[0;33m'   # Amarillo/Marrón para el tronco
-YELLOW='\033[1;33m' # Amarillo brillante para la estrella
-NC='\033[0m'         # Sin color (resetea)
+GREEN='\033[0;32m' 
+BROWN='\033[0;33m'   
+YELLOW='\033[1;33m' 
+NC='\033[0m'         
 
 # Navidad
 echo -e "${YELLOW}           * ${NC}" 

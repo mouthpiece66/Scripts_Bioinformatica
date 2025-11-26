@@ -57,7 +57,7 @@ This naming consistency is essential for FastQC, Trimmomatic, and MultiQC.
 
 ## 🚀 Pipeline Execution Steps (IMPORTANT)
 
-All the scripts should be run from the root `Project/` directory.
+All the scripts should be run from outside from Project directory.
 The order of execution is as follows:
 
 ## 1) Create the project directory structure:
@@ -83,7 +83,7 @@ This script will:
 
 ## 4) Run FastQC on raw data:
 
-bash run_fastqc.sh
+bash run_fastqc_raw.sh
 
 This performs quality control on the raw FASTQ in `Project/Data/Raw_data` files and saves results in `Project/Tools/Fastqc/`.
 
@@ -97,7 +97,8 @@ This trims adapters and low-quality bases from the FASTQ files, saving trimmed o
 
 bash run_multiqc.sh
 
-This aggregates FastQC reports from trimmed data and generates a summary report in `Project/Tools/Multiqc_report/`.
+Scans results from FastQC (raw + trimmed) and Trimmomatic
+Generates a combined summary report in `Project/Tools/Multiqc_report/`.
 
 All the steps above generate log files in `Project/logs/` for transparency and reproducibility.
 

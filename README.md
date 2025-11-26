@@ -57,11 +57,13 @@ This naming consistency is essential for FastQC, Trimmomatic, and MultiQC.
 
 ## 🚀 Pipeline Execution Steps (IMPORTANT)
 
+All the scripts should be run from the root `Project/` directory.
+The order of execution is as follows:
+
 ## 1) Create the project directory structure:
 
-´´´bash
-bash scripts/create_directories.sh
-´´´
+bash create_directories.sh
+
 This generates the directory structure under `Project/`.
 
 ## 2) MOVE YOUR RAW FASTQ SAMPLES (IMPORTANT)
@@ -70,9 +72,9 @@ After creating the directory structure, move your raw FASTQ files into:
 `Project/Data/Raw_data/`
 
 ## 3) Run the checksum and rename script:
-´´´bash
-bash scripts/run_checksum_and_rename.sh
-´´´
+
+bash run_checksum_and_rename.sh
+
 This script will:
 - Normalize filenames to the required format.
 - Generate one MD5 checksum per file for integrity verification.
@@ -80,22 +82,22 @@ This script will:
 - Logs all actions to a timestamped log file in `Project/logs/`.
 
 ## 4) Run FastQC on raw data:
-´´´bash
-bash scripts/run_fastqc.sh
-´´´
+
+bash run_fastqc.sh
+
 This performs quality control on the raw FASTQ in `Project/Data/Raw_data` files and saves results in `Project/Tools/Fastqc/`.
 
 ## 5) Run Trimmomatic for quality trimming:
-´´´bash
-bash scripts/run_trimmomatic.sh
-´´´
+
+bash run_trimmomatic.sh
+
 This trims adapters and low-quality bases from the FASTQ files, saving trimmed outputs in `Project/Tools/Trimmed_data/`.
 
-## 6) Run FastQC on trimmed data:
-´´´bash
-bash scripts/run_fastqc_trimmed.sh
-´´´
-This performs quality control on the trimmed FASTQ files and saves results in `Project/Tools/Fastqc_trimmed/`.
+## 6) Run MultiQC on trimmed data:
+
+bash run_multiqc.sh
+
+This aggregates FastQC reports from trimmed data and generates a summary report in `Project/Tools/Multiqc_report/`.
 
 All the steps above generate log files in `Project/logs/` for transparency and reproducibility.
 

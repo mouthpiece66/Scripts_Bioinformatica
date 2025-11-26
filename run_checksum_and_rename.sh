@@ -35,7 +35,7 @@ mkdir -p "$RAW_DATA_DIR"
 touch "$LOG_FILE"
 
 #Redirect all output to a log file and also show in the terminal 
-exec &> >(tee -a "$LOG_FILE")
+exec > >(tee -a "$LOG_FILE") 2>&1
 
 
 echo "=============================================================="
@@ -48,7 +48,8 @@ echo "--------------------------------------------------------------"
 
 echo "--- NORMALIZING FILENAMES ---"
 
-shopt -s nullglob  #Avoiding errors if no files match
+
+shopt -s extglob  #Avoiding errors if no files match
 
 #loop through every file inside RAW_DATA_DIR
 #For each file, I extract just the filename and check whether it 
